@@ -23,11 +23,23 @@ public class PersonDao {
         allPeople.add(new Person(3L, "Alex"));
         allPeople.add(new Person(4L, "Nikolay L"));
         allPeople.add(new Person(5L, "Nikolay P"));
+
+        // Лог для проверки
+        allPeople.forEach(person -> System.out.println("Loaded person: " + person));
     }
 
     public List<Person> getAllPeople() {
         return allPeople;  //возвращает текущий список после поднятия
     }
 
+
+    public Person getPersonById(Long id) {
+
+        return allPeople.stream()
+                .filter(person -> person.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+    }
 
 }

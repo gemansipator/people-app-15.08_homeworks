@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import site.javadev.dao.PersonDao;
@@ -31,5 +32,17 @@ public class PeopleController {
         model.addAttribute("keyOfAllPeople", allPeople);
         return "view-with-all-people";
     }
+
+    @GetMapping("/{id}")
+    public String getPersonById(@PathVariable("id") Long id, Model model) {
+
+        Person personById = personDao.getPersonById(id);
+        model.addAttribute("keyOfPersonById", personById);
+
+        return "view-with-person-by-id";
+    }
+
+
+
 }
 
