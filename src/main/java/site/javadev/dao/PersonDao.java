@@ -3,18 +3,19 @@ package site.javadev.dao; //класс временно имитирует ба�
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Controller;
 import site.javadev.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class PersonDao {
 
-//    public List<Person> allPeople;
-    public List<Person> allPeople;
+    private List<Person> allPeople;
 
     {
-        allPeople = new ArrayList<Person>(); //создается пустой список во время иннициализации класса
+        allPeople = new ArrayList<>(); //создается пустой список во время иннициализации класса
         // и ниже добавляем изначальный список людей
 
         allPeople.add(new Person(1L, "Georgy"));
@@ -24,7 +25,7 @@ public class PersonDao {
         allPeople.add(new Person(5L, "Nikolay P"));
     }
 
-    public List<Person> getAllPersons() {
+    public List<Person> getAllPeople() {
         return allPeople;  //возвращает текущий список после поднятия
     }
 

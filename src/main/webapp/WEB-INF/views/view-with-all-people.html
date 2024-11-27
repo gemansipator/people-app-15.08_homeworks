@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All People</title>
+</head>
+<body>
+
+
+<div th:each=" eachPerson : ${keyOfAllPeople}" >
+    <p th:text="${eachPerson.getName()}"></p>
+
+
+
+</div>
+
+
+</body>
+</html>

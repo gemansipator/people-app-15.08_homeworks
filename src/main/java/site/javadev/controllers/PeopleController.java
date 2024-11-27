@@ -18,23 +18,18 @@ import java.util.List;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDao personDao; //берем в работу посредника базы данных с эмуляцией базы
+    private final PersonDao personDao;
+
     @Autowired
     public PeopleController(PersonDao personDao) {
         this.personDao = personDao;
     }
 
-    @GetMapping()      //если без параметров то просто возвращаем всё (всех людей)
+    @GetMapping()
     public String getAllPeople(Model model) {
-        // Код, который достанет нам людей из БД и загрузит их в модель (буфер обмена)
-
-        List<Person> allPeople = personDao.getAllPeople();
-        model.addAttribute("keyOfallPeople", allPeople);
-
-
-
+        List<Person> allPeople = personDao.getAllPeople(); // теперь всё корректно
+        model.addAttribute("keyOfAllPeople", allPeople);
         return "view-with-all-people";
     }
-
-
 }
+
