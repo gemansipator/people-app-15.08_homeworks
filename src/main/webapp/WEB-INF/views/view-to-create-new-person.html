@@ -10,6 +10,14 @@
     <input id = "nameOfInput" type="text" th:field="*{name}"/>
     <br/>
 
+    <label for="ageOfInput">Input age:</label>
+    <input id="ageOfInput" type="number" th:field="*{age}" />
+    <br />
+
+    <label for="emailOfInput">Input email:</label>
+    <input id="emailOfInput" type="email" th:field="*{email}" />
+    <br />
+
     <input type="submit" value="Push to create new person"/>
 </form>
 

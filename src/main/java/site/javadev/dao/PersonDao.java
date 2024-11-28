@@ -19,11 +19,11 @@ public class PersonDao {
         allPeople = new ArrayList<>(); //создается пустой список во время иннициализации класса
         // и ниже добавляем изначальный список людей
 
-        allPeople.add(new Person(++NEXT_ID, "Georgy"));
-        allPeople.add(new Person(++NEXT_ID, "Bilal"));
-        allPeople.add(new Person(++NEXT_ID, "Alex"));
-        allPeople.add(new Person(++NEXT_ID, "Nikolay L"));
-        allPeople.add(new Person(++NEXT_ID, "Nikolay P"));
+        allPeople.add(new Person(++NEXT_ID, "Georgy", 30, "georgy@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Bilal", 25, "bilal@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Alex", 35, "alex@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay L", 40, "nikolay.l@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay P", 28, "nikolay.p@example.com"));
 
         // Лог для проверки
         allPeople.forEach(person -> System.out.println("Loaded person: " + person));
