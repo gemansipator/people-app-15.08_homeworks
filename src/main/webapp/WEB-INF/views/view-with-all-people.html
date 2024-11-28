@@ -8,7 +8,7 @@
 
 
 <div th:each=" eachPerson : ${keyOfAllPeople}" >
-    <p th:text="${eachPerson.getName()}"></p>
+    <a th:href="@{/people/{id}(id=${eachPerson.getId()})}" th:text="${eachPerson.getName()}"></a>
 </div>
 
 
