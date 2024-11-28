@@ -6,10 +6,7 @@ package site.javadev.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import site.javadev.dao.PersonDao;
 import site.javadev.model.Person;
 
@@ -28,7 +25,8 @@ public class PeopleController {
 
     @GetMapping()
     public String getAllPeople(Model model) {
-        List<Person> allPeople = personDao.getAllPeople(); // теперь всё корректно
+        // Код который достает людей из БД и загрузит их м модель (буфер обмена)
+        List<Person> allPeople = personDao.getAllPeople();
         model.addAttribute("keyOfAllPeople", allPeople);
         return "view-with-all-people";
     }
@@ -42,13 +40,23 @@ public class PeopleController {
         return "view-with-person-by-id";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/create")   // /people/create мы выводим шаблон создания человека
     public String giveToUserPageToCreateNewPerson(Model model) {
 
-        model.addAttribute("keyOfNewPerson", new Person());
+        model.addAttribute("keyOfNewPerson", new Person());  // создаём нового человека и он попадает
+        // в модель в буфер
 
         return "view-to-create-new-person";
     }
+
+    @PostMapping()                    // ловим созданного человека через @ModelAttribute по ключу("keyOfNewPerson")
+    public String createPerson(@ModelAttribute("keyOfNewPerson") Person person) {
+
+        personDao.save(person);   // сохраняем в БД
+        return "redirect:/people"; // перенаправляем на страницу всех людей
+    }
+
+
 
 
 

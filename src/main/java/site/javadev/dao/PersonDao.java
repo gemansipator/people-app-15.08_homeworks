@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 public class PersonDao {
+    private static Long NEXT_ID = 1L;
 
     private List<Person> allPeople;
 
@@ -18,11 +19,11 @@ public class PersonDao {
         allPeople = new ArrayList<>(); //создается пустой список во время иннициализации класса
         // и ниже добавляем изначальный список людей
 
-        allPeople.add(new Person(1L, "Georgy"));
-        allPeople.add(new Person(2L, "Bilal"));
-        allPeople.add(new Person(3L, "Alex"));
-        allPeople.add(new Person(4L, "Nikolay L"));
-        allPeople.add(new Person(5L, "Nikolay P"));
+        allPeople.add(new Person(++NEXT_ID, "Georgy"));
+        allPeople.add(new Person(++NEXT_ID, "Bilal"));
+        allPeople.add(new Person(++NEXT_ID, "Alex"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay L"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay P"));
 
         // Лог для проверки
         allPeople.forEach(person -> System.out.println("Loaded person: " + person));
@@ -42,4 +43,8 @@ public class PersonDao {
 
     }
 
+    public void save(Person person) {
+        person.setId(++NEXT_ID);  //обновляеим id
+        allPeople.add(person);    //добавляем созданого человека в список
+    }
 }
