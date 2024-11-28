@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 public class PersonDao {
-    private static Long NEXT_ID = 1L;
+    private static Long NEXT_ID = 0L;
 
     private List<Person> allPeople;
 
