@@ -42,6 +42,14 @@ public class PeopleController {
         return "view-with-person-by-id";
     }
 
+    @GetMapping("/create")
+    public String giveToUserPageToCreateNewPerson(Model model) {
+
+        model.addAttribute("keyOfNewPerson", new Person());
+
+        return "view-to-create-new-person";
+    }
+
 
 
 }
