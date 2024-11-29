@@ -6,9 +6,7 @@ package site.javadev.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import site.javadev.dao.PersonDao;
 import site.javadev.model.Person;
 
@@ -18,23 +16,48 @@ import java.util.List;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDao personDao; //берем в работу посредника базы данных с эмуляцией базы
-    @Autowired
+    private final PersonDao personDao;
+    
     public PeopleController(PersonDao personDao) {
         this.personDao = personDao;
     }
 
-    @GetMapping()      //если без параметров то просто возвращаем всё (всех людей)
+    @GetMapping()
     public String getAllPeople(Model model) {
-        // Код, который достанет нам людей из БД и загрузит их в модель (буфер обмена)
-
+        // Код который достает людей из БД и загрузит их м модель (буфер обмена)
         List<Person> allPeople = personDao.getAllPeople();
-        model.addAttribute("keyOfallPeople", allPeople);
-
-
-
+        model.addAttribute("keyOfAllPeople", allPeople);
         return "view-with-all-people";
     }
 
+    @GetMapping("/{id}")
+    public String getPersonById(@PathVariable("id") Long id, Model model) {
+
+        Person personById = personDao.getPersonById(id);
+        model.addAttribute("keyOfPersonById", personById);
+
+        return "view-with-person-by-id";
+    }
+
+    @GetMapping("/create")   // /people/create мы выводим шаблон создания человека
+    public String giveToUserPageToCreateNewPerson(Model model) {
+
+        model.addAttribute("keyOfNewPerson", new Person());  // создаём нового человека и он попадает
+        // в модель в буфер
+
+        return "view-to-create-new-person";
+    }
+
+    @PostMapping()                    // ловим созданного человека через @ModelAttribute по ключу("keyOfNewPerson")
+    public String createPerson(@ModelAttribute("keyOfNewPerson") Person person) {
+
+        personDao.save(person);   // сохраняем в БД
+        return "redirect:/people"; // перенаправляем на страницу всех людей
+    }
+
+
+
+
 
 }
+

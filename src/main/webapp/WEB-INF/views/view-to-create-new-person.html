@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creat</title>
+</head>
+<body>
+<form th:method="post" th:action="@{/people}" th:object="${keyOfNewPerson}">
+    <label for="nameOfInput">Input name of new </label>
+    <input id = "nameOfInput" type="text" th:field="*{name}"/>
+    <br/>
+
+    <label for="ageOfInput">Input age:</label>
+    <input id="ageOfInput" type="number" th:field="*{age}" />
+    <br />
+
+    <label for="emailOfInput">Input email:</label>
+    <input id="emailOfInput" type="email" th:field="*{email}" />
+    <br />
+
+    <input type="submit" value="Push to create new person"/>
+</form>
+
+
+</body>
+</html>
