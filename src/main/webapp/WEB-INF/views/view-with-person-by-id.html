@@ -3,6 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Person</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        span {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
 <p>ID: <span th:text="${keyOfPersonById.getId()}"></span></p>
