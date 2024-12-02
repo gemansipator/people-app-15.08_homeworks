@@ -2,10 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Person</title>
     <style>
+        /* Общие стили для страницы */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
@@ -15,30 +17,50 @@
             height: 100vh;
         }
 
+        /* Контейнер для информации о человеке */
         .container {
             background-color: #fff;
-            padding: 20px;
-            width: 300px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
         }
 
-        p {
-            font-size: 16px;
-            margin: 10px 0;
+        /* Заголовок */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Строки с данными */
+        .info {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Текст и значение */
+        .info span {
+            font-weight: bold;
             color: #333;
         }
 
-        span {
-            font-weight: bold;
-            color: #555;
+        /* Вспомогательные стили */
+        p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
-<p>ID: <span th:text="${keyOfPersonById.getId()}"></span></p>
-<p>Name: <span th:text="${keyOfPersonById.getName()}"></span></p>
-<p>Age: <span th:text="${keyOfPersonById.getAge()}"></span></p>
-<p>Email: <span th:text="${keyOfPersonById.getEmail()}"></span></p>
+<div class="container">
+    <h1>Information about the person</h1>
+    <p class="info">ID: <span th:text="${keyOfPersonById.getId()}"></span></p>
+    <p class="info">Name: <span th:text="${keyOfPersonById.getName()}"></span></p>
+    <p class="info">Age: <span th:text="${keyOfPersonById.getAge()}"></span></p>
+    <p class="info">Email: <span th:text="${keyOfPersonById.getEmail()}"></span></p>
+</div>
 </body>
 </html>

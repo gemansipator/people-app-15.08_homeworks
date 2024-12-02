@@ -55,7 +55,21 @@ public class PeopleController {
         return "redirect:/people"; // перенаправляем на страницу всех людей
     }
 
+    @GetMapping("/edit/{id}")
+    public String giveToUserPageToEditPerson(@PathVariable("id") Long id, Model model) {
+    Person personToBeEdited = personDao.getPersonById(id);
+    model.addAttribute("keyOfPersonToBeEdited", personToBeEdited);
 
+    return "view-to-edit-person";
+    }
+    @PostMapping("/edit/{id}")
+    public String editPerson(@PathVariable("id") Long id,
+                             @ModelAttribute("keyOfPersonToBeEdited") Person personFromForm)
+    {
+        personDao.update(personFromForm,id);
+
+        return "redirect:/people";
+    }
 
 
 

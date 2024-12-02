@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+</head>
+<body>
+
+<form th:method="post" th:action="@{/people/edit/{id}(id=${keyOfPersonToBeEdited.getId()})}"
+      th:object="${keyOfPersonToBeEdited}">
+    <label for="nameOfInput">Input name of edit person: </label>
+    <input id = "nameOfInput" type="text" th:field="*{name}"/>
+    <br/>
+
+    <label for="ageOfInput">Input age of edit person:</label>
+    <input id="ageOfInput" type="number" th:field="*{age}" />
+    <br />
+
+    <label for="emailOfInput">Input email of edit person:</label>
+    <input id="emailOfInput" type="email" th:field="*{email}" />
+    <br />
+
+    <input type="submit" value="Push to edit person"/>
+</form>
+
+</body>
+</html>
