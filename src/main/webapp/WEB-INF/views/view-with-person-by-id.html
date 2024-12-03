@@ -61,6 +61,9 @@
     <p class="info">Name: <span th:text="${keyOfPersonById.getName()}"></span></p>
     <p class="info">Age: <span th:text="${keyOfPersonById.getAge()}"></span></p>
     <p class="info">Email: <span th:text="${keyOfPersonById.getEmail()}"></span></p>
+    </br>
+    <a th:href="@{/people/edit/{id}(id=${keyOfPersonById.getId()})}">Edit</a>
+
 </div>
 </body>
 </html>
