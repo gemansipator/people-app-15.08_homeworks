@@ -57,4 +57,7 @@ public class PersonDao {
         }
     }
 
+    public void delete(Long id) {
+        allPeople.removeIf(person -> person.getId().equals(id));
+    }
 }

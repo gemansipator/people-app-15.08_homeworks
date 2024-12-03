@@ -64,6 +64,11 @@
     </br>
     <a th:href="@{/people/edit/{id}(id=${keyOfPersonById.getId()})}">Edit</a>
 
+    <form th:method="post" th:action="@{/people/delete/{id}(id=${keyOfPersonById.getId()})}"
+          th:object="${keyOfPersonToBeEdited}">
+
+        <input type="submit" value="Push to delete this person"/>
+    </form>
 </div>
 </body>
 </html>

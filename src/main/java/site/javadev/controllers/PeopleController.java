@@ -71,6 +71,11 @@ public class PeopleController {
         return "redirect:/people";
     }
 
+    @PostMapping("/delete/{id}")
+    public String deletePerson(@PathVariable("id") Long id) {
+        personDao.delete(id);
+        return "redirect:/people";
+    }
 
 
 }
