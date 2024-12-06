@@ -3,9 +3,11 @@ package site.javadev.controllers;
 
 //1 человек - Person     много людей - People
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import site.javadev.dao.PersonDao;
 import site.javadev.model.Person;
@@ -49,8 +51,10 @@ public class PeopleController {
     }
 
     @PostMapping()                    // ловим созданного человека через @ModelAttribute по ключу("keyOfNewPerson")
-    public String createPerson(@ModelAttribute("keyOfNewPerson") Person person) {
-
+    public String createPerson(@ModelAttribute("keyOfNewPerson") @Valid Person person, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "view-to-create-new-person";
+        }
         personDao.save(person);   // сохраняем в БД
         return "redirect:/people"; // перенаправляем на страницу всех людей
     }
@@ -64,8 +68,12 @@ public class PeopleController {
     }
     @PostMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") Long id,
-                             @ModelAttribute("keyOfPersonToBeEdited") Person personFromForm)
+                             @ModelAttribute("keyOfPersonToBeEdited") @Valid Person personFromForm,
+                             BindingResult bindingResult)
     {
+        if (bindingResult.hasErrors()) {
+            return "view-to-edit-person";
+        }
         personDao.update(personFromForm,id);
 
         return "redirect:/people";
