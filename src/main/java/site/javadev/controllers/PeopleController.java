@@ -85,6 +85,5 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-
 }
 
