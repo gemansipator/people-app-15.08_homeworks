@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Creat</title>
+    <title>Edit Person</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,25 +61,26 @@
     </style>
 </head>
 <body>
-<form th:method="post" th:action="@{/people}" th:object="${keyOfNewPerson}">
-    <label for="nameOfInput">Input name of new </label>
+
+<form th:method="post" th:action="@{/people/edit/{id}(id=${keyOfPersonToBeEdited.getId()})}"
+      th:object="${keyOfPersonToBeEdited}">
+    <label for="nameOfInput">Input name of edit person: </label>
     <input id = "nameOfInput" type="text" th:field="*{name}"/>
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <br/>
 
-    <label for="ageOfInput">Input age:</label>
+    <label for="ageOfInput">Input age of edit person:</label>
     <input id="ageOfInput" type="number" th:field="*{age}" />
     <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
     <br />
 
-    <label for="emailOfInput">Input email:</label>
+    <label for="emailOfInput">Input email of edit person:</label>
     <input id="emailOfInput" type="email" th:field="*{email}" />
     <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
     <br />
 
-    <input type="submit" value="Push to create new person"/>
+    <input type="submit" value="Push to edit person"/>
 </form>
-
 
 </body>
 </html>

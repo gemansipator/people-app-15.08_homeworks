@@ -2,12 +2,93 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Person</title>
+    <style>
+        /* Общие стили для страницы */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Контейнер для информации о человеке */
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Заголовок */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Строки с данными */
+        .info {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Текст и значение */
+        .info span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Вспомогательные стили */
+        p {
+            margin: 0;
+        }
+        .button-delete {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #ec6060;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: block;
+            font-size: 16px;
+            text-decoration: none;
+            color: #333;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-<p>ID: <span th:text="${keyOfPersonById.getId()}"></span></p>
-<p>Name: <span th:text="${keyOfPersonById.getName()}"></span></p>
-<p>Age: <span th:text="${keyOfPersonById.getAge()}"></span></p>
-<p>Email: <span th:text="${keyOfPersonById.getEmail()}"></span></p>
+<div class="container">
+    <h1>Information about the person</h1>
+    <p class="info">ID: <span th:text="${keyOfPersonById.getId()}"></span></p>
+    <p class="info">Name: <span th:text="${keyOfPersonById.getName()}"></span></p>
+    <p class="info">Age: <span th:text="${keyOfPersonById.getAge()}"></span></p>
+    <p class="info">Email: <span th:text="${keyOfPersonById.getEmail()}"></span></p>
+    </br>
+    <a th:href="@{/people/edit/{id}(id=${keyOfPersonById.getId()})}">Edit</a>
+
+    <form th:method="post" th:action="@{/people/delete/{id}(id=${keyOfPersonById.getId()})}"
+          th:object="${keyOfPersonToBeEdited}">
+        </br>
+
+        <input class="button-delete" type="submit" value="Push to delete this person"/>
+    </form>
+</div>
 </body>
 </html>

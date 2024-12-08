@@ -19,11 +19,11 @@ public class PersonDao {
         allPeople = new ArrayList<>(); //создается пустой список во время иннициализации класса
         // и ниже добавляем изначальный список людей
 
-        allPeople.add(new Person(++NEXT_ID, "Georgy", 30, "georgy@example.com"));
-        allPeople.add(new Person(++NEXT_ID, "Bilal", 25, "bilal@example.com"));
-        allPeople.add(new Person(++NEXT_ID, "Alex", 35, "alex@example.com"));
-        allPeople.add(new Person(++NEXT_ID, "Nikolay L", 40, "nikolay.l@example.com"));
-        allPeople.add(new Person(++NEXT_ID, "Nikolay P", 28, "nikolay.p@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Georgy", 25, "georgy@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Bilal", 19, "bilal@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Alex", 41, "alex@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay L", 42, "nikolay.l@example.com"));
+        allPeople.add(new Person(++NEXT_ID, "Nikolay P", 34, "nikolay.p@example.com"));
 
         // Лог для проверки
         allPeople.forEach(person -> System.out.println("Loaded person: " + person));
@@ -46,5 +46,18 @@ public class PersonDao {
     public void save(Person person) {
         person.setId(++NEXT_ID);  //обновляеим id
         allPeople.add(person);    //добавляем созданого человека в список
+    }
+
+    public void update(Person personFromForm, Long id) {
+        Person person = getPersonById(id);   // находим человека по ID
+        if (person != null) {
+            person.setName(personFromForm.getName());
+            person.setAge(personFromForm.getAge());
+            person.setEmail(personFromForm.getEmail());
+        }
+    }
+
+    public void delete(Long id) {
+        allPeople.removeIf(person -> person.getId().equals(id));
     }
 }
