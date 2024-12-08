@@ -80,12 +80,13 @@ public class PersonDao {
 
     public void save(Person person) {
         try {
-            Statement statement = connection.createStatement();//Получаем состояние базы данных из нашего подключения к БД
-            String sql = "INSERT INTO person (id, name, age, email) VALUES (" +
-                    NEXT_ID + ", '" + person.getName() + "', " + person.getAge() + ", '" + person.getEmail() + "')";
-            statement.executeUpdate(sql);  //не возвращаем, а просто исполняем
-            NEXT_ID++;  //следующий ID в БД для нового сохраненного человека
-
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO person (id, name, age, email) VALUES (?, ?, ?, ?)");
+            preparedStatement.setLong(1, NEXT_ID);
+            preparedStatement.setString(2, person.getName());
+            preparedStatement.setInt(3, person.getAge());
+            preparedStatement.setString(4, person.getEmail());
+            preparedStatement.executeUpdate();
+            NEXT_ID++;
         } catch (SQLException e) {
             e.printStackTrace();
         }
