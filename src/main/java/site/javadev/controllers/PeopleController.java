@@ -4,7 +4,6 @@ package site.javadev.controllers;
 //1 человек - Person     много людей - People
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ import java.util.List;
 public class PeopleController {
 
     private final PersonDao personDao;
-    
+
     public PeopleController(PersonDao personDao) {
         this.personDao = personDao;
     }
@@ -61,20 +60,20 @@ public class PeopleController {
 
     @GetMapping("/edit/{id}")
     public String giveToUserPageToEditPerson(@PathVariable("id") Long id, Model model) {
-    Person personToBeEdited = personDao.getPersonById(id);
-    model.addAttribute("keyOfPersonToBeEdited", personToBeEdited);
+        Person personToBeEdited = personDao.getPersonById(id);
+        model.addAttribute("keyOfPersonToBeEdited", personToBeEdited);
 
-    return "view-to-edit-person";
+        return "view-to-edit-person";
     }
+
     @PostMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") Long id,
                              @ModelAttribute("keyOfPersonToBeEdited") @Valid Person personFromForm,
-                             BindingResult bindingResult)
-    {
+                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "view-to-edit-person";
         }
-        personDao.update(personFromForm,id);
+        personDao.update(personFromForm, id);
 
         return "redirect:/people";
     }
