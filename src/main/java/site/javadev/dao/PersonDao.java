@@ -29,7 +29,6 @@ public class PersonDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -48,7 +47,6 @@ public class PersonDao {
                 person.setEmail(resultSet.getString("email"));
                 allPeople.add(person);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,8 +68,6 @@ public class PersonDao {
                 person.setAge(resultSet.getInt("age"));
                 person.setEmail(resultSet.getString("email"));
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,16 +86,16 @@ public class PersonDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void update(Person personFromForm, Long id) {
         try {
-            Statement statement = connection.createStatement();//Получаем состояние базы данных из нашего подключения к БД
-            String sql = "UPDATE person SET name = '" + personFromForm.getName() + "', age = " + personFromForm.getAge() +
-                    ", email = '" + personFromForm.getEmail() + "' WHERE id = " + id;
-            statement.executeUpdate(sql);  //не возвращаем, а просто исполняем
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE person SET name = ?, age = ?, email = ? WHERE id = ?");
+            preparedStatement.setString(1, personFromForm.getName());
+            preparedStatement.setInt(2, personFromForm.getAge());
+            preparedStatement.setString(3, personFromForm.getEmail());
+            preparedStatement.setLong(4, id);
+            preparedStatement.executeUpdate();   //не возвращаем, а просто исполняем
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -110,14 +106,11 @@ public class PersonDao {
 
     public void delete(Long id) {
         try {
-            Statement statement = connection.createStatement();//Получаем состояние базы данных из нашего подключения к БД
-            String sql = "DELETE FROM person WHERE id = " + id;
-            statement.executeUpdate(sql);  //не возвращаем, а просто исполняем
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM person WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate(); //не возвращаем, а просто исполняем
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }
