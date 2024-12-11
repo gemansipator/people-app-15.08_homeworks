@@ -38,9 +38,8 @@ public class PersonDao {
     }
 
     public void save(Person person) {
-        Long maxId = jdbcTemplate.queryForObject("SELECT COALESCE(MAX(id), 0) FROM person", Long.class);
 
-        jdbcTemplate.update("INSERT INTO person (id, name, age, email) VALUES (?, ?, ?, ?)", maxId + 1, person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("INSERT INTO person (name, age, email) VALUES ( ?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
     }
 
     public void update(Person personFromForm, Long id) {
