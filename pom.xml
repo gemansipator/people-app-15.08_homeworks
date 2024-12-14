@@ -10,11 +10,19 @@
   <!-- Указание кодировки проекта -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-version>6.1.14</spring-version>
     <maven.compiler.source>11</maven.compiler.source> <!-- или версия JDK, которую вы используете -->
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -53,7 +61,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>6.1.14</version>
+      <version>${spring-version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
@@ -67,7 +75,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.1.14</version>
+      <version>${spring-version}</version>
     </dependency>
 
     <!-- Thymeleaf для Spring 6 -->
