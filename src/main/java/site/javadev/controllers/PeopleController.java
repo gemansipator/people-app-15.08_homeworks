@@ -83,6 +83,13 @@ public class PeopleController {
         personDao.delete(id);
         return "redirect:/people";
     }
+    @GetMapping("/makeAdmin")
+    public String giveToUserPageToMakePersonAdmin(Model model) {
+        List<Person> allPeople = personDao.getAllPeople();
+
+        model.addAttribute("people", allPeople);
+        return "view-to-make-person-admin";
+    }
 
 }
 
