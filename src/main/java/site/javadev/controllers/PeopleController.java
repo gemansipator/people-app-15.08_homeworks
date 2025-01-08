@@ -31,6 +31,7 @@ public class PeopleController {
         return "view-with-all-people";
     }
 
+
     @GetMapping("/{id}")
     public String getPersonById(@PathVariable("id") Long id, Model model) {
 
